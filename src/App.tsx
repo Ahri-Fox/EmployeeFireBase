@@ -1,25 +1,34 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Login from './page/login/Login';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Loading from './components/loading/Loading';
+import HomeTemplate from './templates/HomeTemplate';
+import Register from './page/register/Register';
+import EmployeeTemplate from './templates/EmployeeTemplate';
+import ListEmployee from './page/employee/ListEmployee';
+import ProfileUser from './page/profile/ProfileUser';
+import AddEmployee from './page/employee/AddEmployee';
+import UpdateEmployee from './page/employee/UpdateEmployee';
+import "leaflet/dist/leaflet.css";
+const App: React.FC = () => {
 
-function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Loading />
+      <Switch>
+        <HomeTemplate exact path="/" WrappedComponent={Login} />
+        <HomeTemplate exact path="/login" WrappedComponent={Login} />
+        <HomeTemplate exact path="/register" WrappedComponent={Register} />
+
+
+        <EmployeeTemplate exact path="/listEmployee" WrappedComponent={ListEmployee} />
+        <EmployeeTemplate exact path="/listEmployee/addemployee" WrappedComponent={AddEmployee} />
+        <EmployeeTemplate exact path="/listEmployee/updateemployee/:id" WrappedComponent={UpdateEmployee} />
+
+        <Route exact path='/Profile/:id' component={ProfileUser} />
+      </Switch>
+    </BrowserRouter>
   );
 }
 
